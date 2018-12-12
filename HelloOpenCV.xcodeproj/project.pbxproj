@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C075658D21B7D8D2003087E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C075658C21B7D8D2003087E0 /* main.cpp */; };
-		C075659721B7ECC4003087E0 /* Reconstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C075659521B7ECC4003087E0 /* Reconstruction.cpp */; };
 		C075659821B7ECC4003087E0 /* homography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C075659621B7ECC4003087E0 /* homography.cpp */; };
 		C075659B21B7EDB3003087E0 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C075659921B7EDB3003087E0 /* utils.cpp */; };
+		C07565A421B92661003087E0 /* Reconst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C07565A221B92661003087E0 /* Reconst.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,11 +29,11 @@
 		C075658921B7D8D2003087E0 /* HelloOpenCV */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloOpenCV; sourceTree = BUILT_PRODUCTS_DIR; };
 		C075658C21B7D8D2003087E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C075659321B7ECC4003087E0 /* homography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homography.h; sourceTree = "<group>"; };
-		C075659421B7ECC4003087E0 /* Reconstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reconstruction.h; sourceTree = "<group>"; };
-		C075659521B7ECC4003087E0 /* Reconstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Reconstruction.cpp; sourceTree = "<group>"; };
 		C075659621B7ECC4003087E0 /* homography.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = homography.cpp; sourceTree = "<group>"; };
 		C075659921B7EDB3003087E0 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utils.cpp; path = "../../../Downloads/drive-download-20181205T112730Z-001/utils.cpp"; sourceTree = "<group>"; };
 		C075659A21B7EDB3003087E0 /* utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = utils.hpp; path = "../../../Downloads/drive-download-20181205T112730Z-001/utils.hpp"; sourceTree = "<group>"; };
+		C07565A221B92661003087E0 /* Reconst.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reconst.cpp; sourceTree = "<group>"; };
+		C07565A321B92661003087E0 /* Reconst.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Reconst.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,11 +66,11 @@
 		C075658B21B7D8D2003087E0 /* HelloOpenCV */ = {
 			isa = PBXGroup;
 			children = (
+				C07565A221B92661003087E0 /* Reconst.cpp */,
+				C07565A321B92661003087E0 /* Reconst.hpp */,
 				C075659921B7EDB3003087E0 /* utils.cpp */,
 				C075659A21B7EDB3003087E0 /* utils.hpp */,
 				C075659321B7ECC4003087E0 /* homography.h */,
-				C075659521B7ECC4003087E0 /* Reconstruction.cpp */,
-				C075659421B7ECC4003087E0 /* Reconstruction.h */,
 				C075659621B7ECC4003087E0 /* homography.cpp */,
 				C075658C21B7D8D2003087E0 /* main.cpp */,
 			);
@@ -135,7 +135,7 @@
 			files = (
 				C075659821B7ECC4003087E0 /* homography.cpp in Sources */,
 				C075658D21B7D8D2003087E0 /* main.cpp in Sources */,
-				C075659721B7ECC4003087E0 /* Reconstruction.cpp in Sources */,
+				C07565A421B92661003087E0 /* Reconst.cpp in Sources */,
 				C075659B21B7EDB3003087E0 /* utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +259,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9869D9G4QM;
+				ENABLE_TESTABILITY = YES;
 				HEADER_SEARCH_PATHS = "/usr/local/Cellar/opencv@2/2.4.13.7/include";
 				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/opencv@2/2.4.13.7/lib";
 				OTHER_LDFLAGS = (
