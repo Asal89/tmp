@@ -195,10 +195,10 @@ void threshold_filter(Mat& cost_map, double threshold, Mat& dst)
 int main(int argc, const char * argv[]) {
     
     // Load image:
-    Mat left_image = imread("/Users/asaf/Desktop/left_110_2018-11-15-09-47-51-650.jpg", IMREAD_GRAYSCALE);
-    Mat right_image = imread("/Users/asaf/Desktop/right_110_2018-11-15-09-47-51-650.jpg", IMREAD_GRAYSCALE);
-    resize(left_image, left_image, Size(), 0.5, 0.5);
-    resize(right_image, right_image, Size(), 0.5, 0.5);
+    Mat leftCurrImage = imread("/Users/asaf/Desktop/left_110_2018-11-15-09-47-51-650.jpg", IMREAD_GRAYSCALE);
+    Mat rightCurrImage = imread("/Users/asaf/Desktop/right_110_2018-11-15-09-47-51-650.jpg", IMREAD_GRAYSCALE);
+    resize(leftCurrImage, leftCurrImage, Size(), 0.5, 0.5);
+    resize(rightCurrImage, rightCurrImage, Size(), 0.5, 0.5);
     Mat corr_intensities, corr_x_derivative, corr_y_derivative;
     
     // Some arrays for camera parameters:
@@ -235,11 +235,11 @@ int main(int argc, const char * argv[]) {
 
     // Create x_map & y_map:
     Mat map_x, map_y, warped;
-    map_x.create(left_image.size(), CV_32FC1);
-    map_y.create(left_image.size(), CV_32FC1);
-    for(int r = 0; r < left_image.rows; r++)
+    map_x.create(leftCurrImage.size(), CV_32FC1);
+    map_y.create(leftCurrImage.size(), CV_32FC1);
+    for(int r = 0; r < leftCurrImage.rows; r++)
     {
-        for(int c = 0; c < left_image.cols; c++)
+        for(int c = 0; c < leftCurrImage.cols; c++)
         {
             map_x.at<float>(r, c) = (H.getHomography().at<double>(0,0)*c + H.getHomography().at<double>(0,1)*r + H.getHomography().at<double>(0,2)) / (H.getHomography().at<double>(2,0)*c + H.getHomography().at<double>(2,1)*r + H.getHomography().at<double>(2,2));
             map_y.at<float>(r, c) = (H.getHomography().at<double>(1,0)*c + H.getHomography().at<double>(1,1)*r + H.getHomography().at<double>(1,2)) / (H.getHomography().at<double>(2,0)*c + H.getHomography().at<double>(2,1)*r + H.getHomography().at<double>(2,2));
@@ -250,19 +250,19 @@ int main(int argc, const char * argv[]) {
     
     high_resolution_clock::time_point t1 = high_resolution_clock::now();   // Take time
     
-    Reconst rec(map_x, map_y, right_image, left_image, prm);
+    Reconst rec(map_x, map_y, rightCurrImage, leftCurrImage, prm);
     rec.getWarped(warped);
     
     // Calculate derivatives:
     Mat left_x_derivative, left_y_derivative;
     Mat warped_x_derivative, warped_y_derivative;
-    derivative(left_image, left_x_derivative, "x");
-    derivative(left_image, left_y_derivative, "y");
+    derivative(leftCurrImage, left_x_derivative, "x");
+    derivative(leftCurrImage, left_y_derivative, "y");
     derivative(warped, warped_x_derivative, "x");
     derivative(warped, warped_y_derivative, "y");
 
     // Calculate correlation of intensities:
-    corr(left_image, warped, 8, corr_intensities);
+    corr(leftCurrImage, warped, 8, corr_intensities);
 
     // Calculate correlation of 'x' derivative:
     corr(left_x_derivative, warped_x_derivative, 8, corr_x_derivative);
