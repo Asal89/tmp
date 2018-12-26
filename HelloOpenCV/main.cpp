@@ -29,7 +29,7 @@ int main(int argc, const char * argv[]) {
     resize(left_image, left_image, Size(), 0.5, 0.5);
     resize(right_image, right_image, Size(), 0.5, 0.5);
     
-    Mat warped, corr_intensities, corr_x_derivative, corr_y_derivative, std_map, cost_map, masked;
+    Mat warped, corr_intensities, corr_x_derivative, corr_y_derivative, std_map, cost_map, masked, mask;
 
     // Some arrays for camera parameters:
     double KmatRef[3][3] = {{6811.10072821551/2, 0, 961.272247363782/2 },
@@ -76,13 +76,12 @@ int main(int argc, const char * argv[]) {
         }
     }
 
-    // Warp (loop starts from here):
-
+  
+    // Reconstruction:
     high_resolution_clock::time_point t1 = high_resolution_clock::now();   // Take time
 
     Reconst reconstruct(map_x, map_y, right_image, left_image, stereo_params);
-    
-    // Stop time:
+
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>( t2 - t1 ).count();
     cout <<"total time: " << duration << endl;
@@ -94,28 +93,54 @@ int main(int argc, const char * argv[]) {
     reconstruct.getStdMap(std_map);
     reconstruct.getCostMap(cost_map);
     reconstruct.getMasked(masked);
+    reconstruct.getMask(mask);
+    reconstruct.XYcalculate();
+    cout << "mean Y: " << reconstruct.getInterpulatedY() << endl;
     
-    // Show some results:
-    imshow("warped", warped);
-    waitKey(0);
+//    // Find indices:
+//    Mat uv,m;
+//    Mat x = Mat::ones(3, 3, CV_64FC1);
+//    Mat y = Mat::zeros(2, 9, CV_64FC1);
+//    m = x>0;
+//    findNonZero(m, uv);
+//    cout << uv.channels() << endl;
+//    uv.convertTo(uv, CV_64FC2);
+//    cout << uv << endl;
+//    cout << uv.channels() << endl;
+//    Mat c1,c2;
+//    vector<Mat> channels(2);
+//    split(uv, channels);
+//    c1 = channels[0];
+//    c2 = channels[1];
+//    hconcat(c1, c1, uv);
+//
+//    cout << uv << endl;
+//    cout << uv.rows << " , " << uv.cols << endl;
+//
+//    cout << stereo_params.K.at<double>(0,0) << endl;
     
-    imshow("intense", corr_intensities);
-    waitKey(0);
     
-    imshow("x", corr_x_derivative);
-    waitKey(0);
-    
-    imshow("y", corr_y_derivative);
-    waitKey(0);
-    
-    imshow("std", std_map);
-    waitKey(0);
-    
-    imshow("cost map", cost_map);
-    waitKey(0);
-    
-    imshow("mask", masked);
-    waitKey(0);
+//    // Show some results:
+//    imshow("warped", warped);
+//    waitKey(0);
+//
+//    imshow("intense", corr_intensities);
+//    waitKey(0);
+//
+//    imshow("x", corr_x_derivative);
+//    waitKey(0);
+//
+//    imshow("y", corr_y_derivative);
+//    waitKey(0);
+//
+//    imshow("std", std_map);
+//    waitKey(0);
+//
+//    imshow("cost map", cost_map);
+//    waitKey(0);
+//
+//    imshow("mask", masked);
+//    waitKey(0);
     
     return 0;
 

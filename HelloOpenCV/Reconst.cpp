@@ -112,14 +112,13 @@ void cost_function(Mat& corr_intensities, Mat& corr_x_derivative, Mat& corr_y_de
     
 }
 
-void threshold_filter(Mat& cost_map, double threshold, Mat& dst)
+void threshold_filter(Mat& cost_map, double threshold, Mat& masked, Mat& mask)
 {
     
-    Mat mask;
     double min, max;
     minMaxLoc(cost_map, &min, &max);
     mask = cost_map > (threshold*max) ;
-    cost_map.copyTo(dst, mask);
+    cost_map.copyTo(masked, mask);
     cout << "Threshold value: " << threshold*max << endl;
 }
 
@@ -152,7 +151,56 @@ Reconst::Reconst(Mat& map_x, Mat& map_y, Mat& right_image, Mat& left_image, ster
     cost_function(corr_intensities_, corr_x_derivative_, corr_y_derivative_, std_map_, cost_map_);
     
     // Thresholding:
-    threshold_filter(cost_map_, 0.4, masked_);
+    threshold_filter(cost_map_, 0.4, masked_, mask_);
+}
+
+void Reconst::XYcalculate()
+{
+    Mat uv_temp, channel_u, channel_v;
+    
+    double focal_length_u    = stereoParams_.Kref.at<double>(0,0);
+    double focal_length_v    = stereoParams_.Kref.at<double>(1,1);
+    double principle_point_u = stereoParams_.Kref.at<double>(0,2);
+    double principle_point_v = stereoParams_.Kref.at<double>(1,2);
+    double skew              = stereoParams_.Kref.at<double>(0,1);
+    double distance          = stereoParams_.d;
+    
+    findNonZero(mask_, uv_temp);
+    uv_temp.convertTo(uv_temp, CV_64FC2);
+    
+    vector<Mat> channels(2);
+    split(uv_temp, channels);
+    channel_u = channels[0];
+    channel_v = channels[1];
+    
+    channel_u = channel_u - principle_point_u;
+    channel_v = channel_v - principle_point_v;
+    
+    hconcat(channel_u, channel_v, uv_);
+    
+    uv_ = uv_ * distance;
+    
+    double A_data[2][2] = {{focal_length_u, skew}, {0, focal_length_v}};
+    Mat A(2,2,CV_64FC1,A_data);
+    A = A.inv();
+    transpose(A, A);
+    
+    cout << "channel_u: " << channel_u.rows << " , " << channel_u.cols << endl;
+    cout << "channel_v: " << channel_v.rows << " , " << channel_v.cols << endl;
+    cout << "A: " << A.rows << " , " << A.cols << endl;
+    cout << "uv_ " << uv_.rows << " , " << uv_.cols << endl;
+    
+    XY_ = uv_*A;
+    
+    interpulated_Y_ = Y_interpulate();
+}
+
+double Reconst::Y_interpulate()
+{
+    // Calculate average of each row:
+    Mat cols_average;
+    reduce(XY_, cols_average, 0, CV_REDUCE_AVG);
+    return cols_average.at<double>(0,1);
 }
 
 void Reconst::getWarped(Mat &dst)
@@ -188,4 +236,15 @@ void Reconst::getCostMap(Mat& dst)
 void Reconst::getMasked(Mat& dst)
 {
     dst = masked_;
+}
+
+void Reconst::getMask(Mat& dst)
+{
+    dst = mask_;
+}
+
+
+double Reconst::getInterpulatedY()
+{
+    return interpulated_Y_;
 }

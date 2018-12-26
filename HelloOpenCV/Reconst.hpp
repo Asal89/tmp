@@ -22,6 +22,8 @@ public:
     
     Reconst(Mat& map_x, Mat& map_y, Mat& right_image, Mat& left_image, stereoParams& stereo_params);
    
+    void XYcalculate();
+    
     void getWarped(Mat& dst);
     
     void getCorrelationIntensities(Mat& dst);
@@ -36,8 +38,14 @@ public:
     
     void getMasked(Mat& dst);
     
+    void getMask(Mat& dst);
+    
+    double getInterpulatedY();
+    
+    
     
 private:
+    // Variables:
     stereoParams stereoParams_;
     Mat leftImage_;
     Mat rightImage;
@@ -54,6 +62,12 @@ private:
     Mat std_map_;
     Mat cost_map_;
     Mat masked_;
+    Mat mask_;
+    Mat uv_;
+    Mat XY_;
+    double interpulated_Y_;
+    // Functions:
+    double Y_interpulate();
     
 };
 #endif /* Reconst_hpp */
