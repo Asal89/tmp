@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HelloOpenCV.xcodeproj">
+      location = "group:/Users/asaf/Documents/HelloOpenCV/HelloOpenCV/Reconstruction.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/asaf/Documents/HelloOpenCV/HelloOpenCV/Reconstruction.h">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

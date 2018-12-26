@@ -80,7 +80,7 @@ int main(int argc, const char * argv[]) {
     // Reconstruction:
     high_resolution_clock::time_point t1 = high_resolution_clock::now();   // Take time
 
-    Reconst reconstruct(map_x, map_y, right_image, left_image, stereo_params);
+    Reconstruction reconstruct(map_x, map_y, right_image, left_image, stereo_params);
 
     high_resolution_clock::time_point t2 = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>( t2 - t1 ).count();

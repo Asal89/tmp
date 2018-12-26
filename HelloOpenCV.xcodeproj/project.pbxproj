@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C01F6D2521D3AC4E000B6021 /* Reconstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C01F6D2321D3AC4E000B6021 /* Reconstruction.cpp */; };
 		C075658D21B7D8D2003087E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C075658C21B7D8D2003087E0 /* main.cpp */; };
 		C075659821B7ECC4003087E0 /* homography.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C075659621B7ECC4003087E0 /* homography.cpp */; };
-		C07565A421B92661003087E0 /* Reconst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C07565A221B92661003087E0 /* Reconst.cpp */; };
 		C0B22A6221CA26B10026E8BC /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0B22A6121CA26B10026E8BC /* utils.cpp */; };
 /* End PBXBuildFile section */
 
@@ -26,12 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C01F6D2321D3AC4E000B6021 /* Reconstruction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reconstruction.cpp; sourceTree = "<group>"; };
+		C01F6D2421D3AC4E000B6021 /* Reconstruction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Reconstruction.hpp; sourceTree = "<group>"; };
 		C075658921B7D8D2003087E0 /* HelloOpenCV */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloOpenCV; sourceTree = BUILT_PRODUCTS_DIR; };
 		C075658C21B7D8D2003087E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C075659321B7ECC4003087E0 /* homography.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homography.h; sourceTree = "<group>"; };
 		C075659621B7ECC4003087E0 /* homography.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = homography.cpp; sourceTree = "<group>"; };
-		C07565A221B92661003087E0 /* Reconst.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Reconst.cpp; sourceTree = "<group>"; };
-		C07565A321B92661003087E0 /* Reconst.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Reconst.hpp; sourceTree = "<group>"; };
 		C0B22A6121CA26B10026E8BC /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utils.cpp; path = ../../../Desktop/utils.cpp; sourceTree = "<group>"; };
 		C0B22A6321CA26D00026E8BC /* utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = utils.hpp; path = ../../../Desktop/utils.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,11 +68,11 @@
 			children = (
 				C0B22A6321CA26D00026E8BC /* utils.hpp */,
 				C0B22A6121CA26B10026E8BC /* utils.cpp */,
-				C07565A221B92661003087E0 /* Reconst.cpp */,
-				C07565A321B92661003087E0 /* Reconst.hpp */,
 				C075659321B7ECC4003087E0 /* homography.h */,
 				C075659621B7ECC4003087E0 /* homography.cpp */,
 				C075658C21B7D8D2003087E0 /* main.cpp */,
+				C01F6D2321D3AC4E000B6021 /* Reconstruction.cpp */,
+				C01F6D2421D3AC4E000B6021 /* Reconstruction.hpp */,
 			);
 			path = HelloOpenCV;
 			sourceTree = "<group>";
@@ -134,9 +134,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C075659821B7ECC4003087E0 /* homography.cpp in Sources */,
+				C01F6D2521D3AC4E000B6021 /* Reconstruction.cpp in Sources */,
 				C0B22A6221CA26B10026E8BC /* utils.cpp in Sources */,
 				C075658D21B7D8D2003087E0 /* main.cpp in Sources */,
-				C07565A421B92661003087E0 /* Reconst.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
