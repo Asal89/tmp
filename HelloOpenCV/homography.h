@@ -8,7 +8,7 @@ using namespace std;
 using namespace cv;
 
 
-
+/* this comment is only for git validation - can be deleted */
 class homography {
     
 public:
